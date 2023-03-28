@@ -1,0 +1,44 @@
+label {
+  font-family: sans-serif;
+}
+
+h1 {
+  font-family: monospace;
+}
+
+#output {
+  display: flex;
+  flex-direction: column;
+  font-family: monospace;
+  margin-top: 20px;
+  gap: 5px;
+}
+
+#output * {
+  display: inline-block;
+  margin: 0;
+}
+
+#output b {
+  width: 100px;
+}
+
+.line {
+  background: yellow;
+}
+
+.action {
+  background: #FFFF88;
+}
+  
+.cue {
+  background: lime;
+}
+
+.action.cue {
+  background: lightgreen;
+}
+
+optgroup {
+  color: blue;
+}
