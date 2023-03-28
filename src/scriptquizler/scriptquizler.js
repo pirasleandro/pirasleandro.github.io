@@ -11,6 +11,10 @@ $.ajax({
   }
 });
 
+function displayTitle() {
+  $('#output').empty().append($('<h2>').text(`${i+1}${String.fromCharCode(j+65)} - ${sceneMeta[i].title}`));
+}
+
 function init(rawScript) {
   let mainScenes = rawScript.split(mainSceneRegex);
   mainScenes.shift();
@@ -42,6 +46,8 @@ function init(rawScript) {
     });
     $('#scene-select').append($optgroup);
   });
+
+  displayTitle();
 }
 
 let scene = script[0][0];
@@ -54,7 +60,7 @@ let showCues = false;
 function reset() {
   currentLine = 0;
   let [i, j] = current;
-  $('#output').empty().append($('<h2>').text(`${i+1}${String.fromCharCode(j+65)} - ${sceneMeta[i].title}`));
+  displayTitle();
 }
 
 $('#scene-select').on('change', function(){
