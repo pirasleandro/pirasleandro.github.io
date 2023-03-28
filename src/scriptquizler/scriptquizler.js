@@ -3,8 +3,8 @@ let script = [];
 let mainSceneRegex = /Szene \d+$/gm;
 let subSceneRegex = /\d+\w$/gm;
 
-let scene = script[0][0];
-let current = [0, 0];
+let scene;
+let current;
 let actor = "";
 let currentLine = 0;
 let sceneOver = false;
@@ -15,6 +15,7 @@ $.ajax({
   async: false,
   success: function (data){
     init(data);
+    scene = script[0][0];
     current = [0, 0];
     displayTitle();
   }
