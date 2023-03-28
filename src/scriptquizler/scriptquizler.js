@@ -7,13 +7,10 @@ $.ajax({
   url: "./script.txt",
   async: false,
   success: function (data){
-    init(data)
+    init(data);
+    displayTitle();
   }
 });
-
-function displayTitle() {
-  $('#output').empty().append($('<h2>').text(`${i+1}${String.fromCharCode(j+65)} - ${sceneMeta[i].title}`));
-}
 
 function init(rawScript) {
   let mainScenes = rawScript.split(mainSceneRegex);
@@ -46,8 +43,6 @@ function init(rawScript) {
     });
     $('#scene-select').append($optgroup);
   });
-
-  displayTitle();
 }
 
 let scene = script[0][0];
@@ -57,17 +52,12 @@ let currentLine = 0;
 let sceneOver = false;
 let showCues = false;
 
-function reset() {
-  currentLine = 0;
-  let [i, j] = current;
-  displayTitle();
-}
-
 $('#scene-select').on('change', function(){
 	let [i, j] = this.value.split(',').map(str => parseInt(str));
   current = [i, j];
 	scene = script[i][j];
-  reset();
+  currentLine = 0;
+  displayTitle();
 });
 
 $('#character-select').on('change', function(){
@@ -131,5 +121,11 @@ function nextScene() {
   }
   current = [i, j];
   scene = script[i][j];
-  reset();
+  currentLine = 0;
+  displayTitle();
+}
+
+function displayTitle() {
+  let [i, j] = current;
+  $('#output').empty().append($('<h2>').text(`${i+1}${String.fromCharCode(j+65)} - ${sceneMeta[i].title}`));
 }
