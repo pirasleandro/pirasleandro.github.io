@@ -15,6 +15,7 @@ $.ajax({
   async: false,
   success: function (data){
     init(data);
+    current = [0, 0];
     displayTitle();
   }
 });
