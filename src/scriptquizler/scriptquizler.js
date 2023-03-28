@@ -44,16 +44,18 @@ function init(rawScript) {
   });
 }
 
-function reset() {
-  currentLine = 0;
-  $('#output').empty();
-}
-
 let scene = script[0][0];
+let current = [0, 0];
 let actor = "";
 let currentLine = 0;
 let sceneOver = false;
 let showCues = false;
+
+function reset() {
+  currentLine = 0;
+  let [i, j] = current;
+  $('#output').empty().append($('<h2>').text(`${i+1}${String.fromCharCode(j+65)} - ${sceneMeta[i].title}`));
+}
 
 $('#scene-select').on('change', function(){
 	let [i, j] = this.value.split(',').map(str => parseInt(str));
