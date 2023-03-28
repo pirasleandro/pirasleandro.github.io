@@ -44,6 +44,11 @@ function init(rawScript) {
   });
 }
 
+function reset() {
+  currentLine = 0;
+  $('#output').empty();
+}
+
 let scene = script[0][0];
 let actor = "";
 let currentLine = 0;
@@ -52,10 +57,9 @@ let showCues = false;
 
 $('#scene-select').on('change', function(){
 	let [i, j] = this.value.split(',').map(str => parseInt(str));
-  currentLine = 0;
   current = [i, j];
 	scene = script[i][j];
-  $('#output').empty();
+  reset();
 });
 
 $('#character-select').on('change', function(){
@@ -116,7 +120,7 @@ function nextScene() {
     i++;
     j = 0;
   }
-  currentLine = 0;
   current = [i, j];
   scene = script[i][j];
+  reset();
 }
