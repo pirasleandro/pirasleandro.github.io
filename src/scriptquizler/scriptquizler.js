@@ -1,3 +1,8 @@
+let sceneMeta = [];
+let script = [];
+let mainSceneRegex = /Szene \d+$/gm;
+let subSceneRegex = /\d+\w$/gm;
+
 $.ajax({
   url: "./script.txt",
   async: false,
@@ -5,11 +10,6 @@ $.ajax({
     init(data)
   }
 });
-
-let sceneMeta = [];
-let script = [];
-let mainSceneRegex = /Szene \d+$/gm;
-let subSceneRegex = /\d+\w$/gm;
 
 function init(rawScript) {
   let mainScenes = rawScript.split(mainSceneRegex);
