@@ -3,6 +3,13 @@ let script = [];
 let mainSceneRegex = /Szene \d+$/gm;
 let subSceneRegex = /\d+\w$/gm;
 
+let scene = script[0][0];
+let current = [0, 0];
+let actor = "";
+let currentLine = 0;
+let sceneOver = false;
+let showCues = false;
+
 $.ajax({
   url: "./script.txt",
   async: false,
@@ -44,13 +51,6 @@ function init(rawScript) {
     $('#scene-select').append($optgroup);
   });
 }
-
-let scene = script[0][0];
-let current = [0, 0];
-let actor = "";
-let currentLine = 0;
-let sceneOver = false;
-let showCues = false;
 
 $('#scene-select').on('change', function(){
 	let [i, j] = this.value.split(',').map(str => parseInt(str));
