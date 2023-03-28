@@ -45,17 +45,16 @@ function init(rawScript) {
 }
 
 let scene = script[0][0];
-
 let actor = "";
-
-let current = 0;
-
+let currentLine = 0;
+let sceneOver = false;
 let showCues = false;
 
 $('#scene-select').on('change', function(){
-	let [i, j] = this.value.split(',');
-  current = 0;
-	scene = script[parseInt(i)][parseInt(j)];
+	let [i, j] = this.value.split(',').map(str => parseInt(str));
+  currentLine = 0;
+  current = [i, j];
+	scene = script[i][j];
   $('#output').empty();
 });
 
@@ -72,12 +71,31 @@ $('html').keydown((event) => {
   	next();
   }
 });
-$('#output').click((event) => {
+$('#output').click(function(){
 	next();
 });
 
 function next() {
-	let [speaker, line] = scene[current];
+  if (sceneOver) return;
+  if (!scene[currentLine]) {
+    sceneOver = true;
+    $('#output')
+      .append(
+        $('<div>')
+          .addClass('sceneend')
+          .append(
+            $('<span>').text('Ende der Szene.'),
+            $('<button>')
+              .attr('id', 'btn_next_scene')
+              .text('Nächste Szene')
+              .click(function(){
+                nextScene();
+              })
+          )
+      );
+    return;
+  }
+	let [speaker, line] = scene[currentLine];
   $('#output')
   	.append($('<div>')
       .append(
@@ -85,7 +103,20 @@ function next() {
         line ? $('<span>').text(line) : undefined
       )
       .addClass(speaker.includes(actor) ? !line ? 'action' : 'line' : '')
-      .addClass(showCues && (scene[current+1] || ' ')[0].includes(actor) ? 'cue' : '')
+      .addClass(showCues && (scene[currentLine+1] || ' ')[0].includes(actor) ? 'cue' : '')
     );
-  current++;
+  currentLine++;
+}
+
+function nextScene() {
+  let [i, j] = current;
+  if (script[i][j+1]) {
+    j++;
+  } else if (script[i+1][0]) {
+    i++;
+    j = 0;
+  }
+  currentLine = 0;
+  current = [i, j];
+  scene = script[i][j];
 }
