@@ -113,6 +113,7 @@ function next() {
 }
 
 function nextScene() {
+  sceneOver = false;
   let [i, j] = current;
   if (script[i][j+1]) {
     j++;
