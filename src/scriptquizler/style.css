@@ -7,6 +7,7 @@ h1 {
 }
 
 #output {
+  min-height: 100%;
   display: flex;
   flex-direction: column;
   font-family: monospace;
@@ -24,13 +25,14 @@ h1 {
 }
 
 .line {
+  display: flex;
   background: yellow;
 }
 
 .action {
-  background: #FFFF88;
+  background: #ffff88;
 }
-  
+
 .cue {
   background: lime;
 }
@@ -39,11 +41,41 @@ h1 {
   background: lightgreen;
 }
 
-optgroup {
-  color: blue;
-}
-
 .sceneend {
   font-style: italic;
   background: gray;
+}
+
+@media (max-width: 720px) {
+  body {
+    font-size: 25px;
+  }
+  h1 {
+    font-size: 40px;
+  }
+  h2 {
+    font-size: 30px;
+  }
+  #output {
+    gap: 20px;
+  }
+  #output b {
+    width: 200px;
+  }
+  input,
+  select {
+    font-size: 30px;
+    border: 2px solid gray;
+  }
+  optgroup,
+  option {
+    font-size: 13px;
+  }
+  input[type="checkbox"] {
+    width: 30px;
+    height: 30px;
+  }
+  .line {
+    flex-wrap: wrap;
+  }
 }
